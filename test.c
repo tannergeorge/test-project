@@ -17,6 +17,18 @@ int sum(int num) {
     return num + sum(num - 1);
 }
 
+int sum_even(int num) {
+    if (num == 0) {
+        return 0;
+    }
+
+    if (num % 2 == 0) {
+        return num + sum(num - 1);
+    } else {
+        return sum(num - 1);
+    }
+}
+
 int f(int (*operation)(int), int n) {
     int out = 0;
 
@@ -34,8 +46,10 @@ void main(void) {
 
     if (strcmp(func, "factorial") == 0) {
         x = f(factorial, x);
-    } else {
+    } else if (strcmp(func, "sum")) {
         x = f(sum, x);
+    } else {
+        x = f(sum_even, x);
     }
 
     printf("Result: %d", x);
